@@ -1,0 +1,132 @@
+<html>
+<head>
+        <meta charset="UTF-8">
+        <title>Sistema de monitoreo tiempo real</title>
+        <script src = "./socket.io/socket.io.js"></script>
+        <script>
+            function init(){
+                const socket = io();
+                socket.on('lectura', (data) => {
+                    console.log('conectado');
+                    document.getElementById("medida").value=data;
+                    if(data==0){
+                        var neutro="Neutro";
+                        document.getElementById("alerta").value=neutro;
+                        document.getElementById("semaforo").src="https://production-masisa.s3.amazonaws.com/pim/0/b/5/4/0b54ba53d9c4d1656b2e8296e4971f0fb6b0b239_79578_amarillo_ocaso_MDP.jpg";
+                    }
+                    if (data<30){
+                        var normal="Normal";
+                        document.getElementById("alerta").value=normal;
+                        document.getElementById("semaforo").src="https://biblioteca.acropolis.org/wp-content/uploads/2014/12/verde.png";
+                    }
+                    if (data<60 && data>=30){
+                        var alto="Alto";
+                        document.getElementById("alerta").value=alto;
+                        document.getElementById("semaforo").src="https://www.aboutespanol.com/thmb/Ei1zbhWEvYS7spa4O329uFMzi1s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Color-Amarillo-56a036e53df78cafdaa08301.jpg";
+                    }
+                    if (data<=90 && data>=60){
+                        var muyalto="Muy alto";
+                        document.getElementById("alerta").value=muyalto;
+                        document.getElementById("semaforo").src="https://bangbranding.com/blog/wp-content/uploads/2016/09/350x500_destacada-1.jpg";
+                    }
+                });
+            }
+    </script>
+    <script>
+        function init1(){
+                const socket = io();
+                socket.on('data1', (data1) => {
+                    console.log('conectado');
+                    document.getElementById("medida1").value=data1;
+                    if(data1==0){
+                        var neutro="Neutro";
+                        document.getElementById("alerta1").value=neutro;
+                        document.getElementById("semaforo1").src="https://production-masisa.s3.amazonaws.com/pim/0/b/5/4/0b54ba53d9c4d1656b2e8296e4971f0fb6b0b239_79578_amarillo_ocaso_MDP.jpg";
+                    }
+                    if (data1<30){
+                        var normal="Normal";
+                        document.getElementById("alerta1").value=normal;
+                        document.getElementById("semaforo1").src="https://biblioteca.acropolis.org/wp-content/uploads/2014/12/verde.png";
+                    }
+                    if (data1<60 && data1>=30){
+                        var alto="Alto";
+                        document.getElementById("alerta1").value=alto;
+                        document.getElementById("semaforo1").src="https://www.aboutespanol.com/thmb/Ei1zbhWEvYS7spa4O329uFMzi1s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Color-Amarillo-56a036e53df78cafdaa08301.jpg";
+                    }
+                    if (data1<=90 && data1>=60){
+                        var muyalto="Muy alto";
+                        document.getElementById("alerta1").value=muyalto;
+                        document.getElementById("semaforo1").src="https://bangbranding.com/blog/wp-content/uploads/2016/09/350x500_destacada-1.jpg";
+                    }
+                });
+            }
+    </script>
+    <script>
+        function init2(){
+                const socket = io();
+                socket.on('data2', (data2) => {
+                    console.log('conectado');
+                    document.getElementById("medida2").value=data2;
+                    if(data2>=0&&data2<10){
+                        var cerca="Objeto muy cercano";
+                        document.getElementById("alerta2").value=cerca;
+                        document.getElementById("semaforo2").src="https://production-masisa.s3.amazonaws.com/pim/0/b/5/4/0b54ba53d9c4d1656b2e8296e4971f0fb6b0b239_79578_amarillo_ocaso_MDP.jpg";
+                    }
+                    if (data2>=10 && data2<13){
+                        var detectado="Objeto detectado";
+                        
+                        document.getElementById("alerta2").value=detectado;
+                        document.getElementById("semaforo2").src="https://biblioteca.acropolis.org/wp-content/uploads/2014/12/verde.png";
+                    }
+                    if (data2<20 && data2>=13){
+                        var lejano1="Objeto lejano";
+                        document.getElementById("alerta2").value=lejano1;
+                        document.getElementById("semaforo2").src="https://www.aboutespanol.com/thmb/Ei1zbhWEvYS7spa4O329uFMzi1s=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Color-Amarillo-56a036e53df78cafdaa08301.jpg";
+                    }
+                    if (data2<=90 && data2>=20){
+                        var lejano2="Objeto muy lejano";
+                        document.getElementById("alerta2").value=lejano2;
+                        document.getElementById("semaforo2").src="https://bangbranding.com/blog/wp-content/uploads/2016/09/350x500_destacada-1.jpg";
+                    }
+                });
+            }
+    </script>
+</head>
+<body>
+
+        <body bgcolor="#D9D9D9">
+            <IMG src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Universidad-autonoma-de-chile.png"style="width:271px;height:115px">
+            <h1><center>Activación de brazo 4DOF con sensor de distancia - BRAZONEITOR</center></h1>
+            <h1><center>Asignatura: Taller de aplicaciones informáticas</center></h1>
+            <h3><center>Autores: Francisco Muñoz, Luis Salinas, Ignacio Valdés</center></h3>
+            <p>
+                <h3>Medicion de voltaje(random javascript)</h3>
+                NODO 1: <input id="medida" size="10">
+                Sistma de Alerta Condicion:<input id="alerta" size="10">
+
+            <img src="https://bangbranding.com/blog/wp-content/uploads/2016/09/350x500_destacada-1.jpg" input type="image" id="semaforo" style="width: 100px;height: 20px;">
+            </p>
+            <input type="button" onclick="init()" value="Activar sistema">  
+
+            
+            <p>
+                <h3>Medicion de voltaje(procesado python)</h3>
+                NODO 2: <input id="medida1" size="10">
+                Sistma de Alerta Condicion:<input id="alerta1" size="10">
+
+                <img src="https://bangbranding.com/blog/wp-content/uploads/2016/09/350x500_destacada-1.jpg" input type="image" id="semaforo1" style="width: 100px;height: 20px;">
+            </p>
+            <input type="button" onclick="init1()" value="Activar sistema">
+
+
+            <p>
+                <h3>Medicion de distancia</h3>
+                NODO 3: <input id="medida2" size="10">
+                Sistma de Alerta Condicion:<input id="alerta2" size="10">
+
+                <img src="https://bangbranding.com/blog/wp-content/uploads/2016/09/350x500_destacada-1.jpg" input type="image" id="semaforo2" style="width: 100px;height: 20px;">
+            </p>
+            <input type="button" onclick="init2()" value="Activar sistema">
+            
+</body>
+</html>
